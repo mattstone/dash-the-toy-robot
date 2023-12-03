@@ -1,4 +1,5 @@
 class Test 
+  
   def initialize 
     @passed = 0
     @failed = 0
