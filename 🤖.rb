@@ -109,7 +109,7 @@ class Robot
   end 
   
   def reset_health!
-    @lives = 3
+    @lives = @max_lives
   end
 
   def lose_life!
