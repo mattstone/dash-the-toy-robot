@@ -118,6 +118,10 @@ class Robot
     @lives > 0
   end
   
+  def 💀!
+    @lives = 0
+  end
+  
   def lives_left
     return sprite if @lives == 0 
     (1..@lives).inject("") { |string, i| string += "❤️ "}

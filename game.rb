@@ -3,16 +3,20 @@ class Game
   def initialize(options = {})
     @test = true if options[:test] == true
     
-    print "\n"
-    print "Place 🤖 on the table and go exploring.\n"
-    print "\n" 
-    print "Be careful you don't fall off. You have 3 ❤️ 's\n"
-    print "\n"
+    if !is_test?
+      print "\n"
+      print "Place 🤖 on the table and go exploring.\n"
+      print "\n" 
+      print "Be careful you don't fall off. You have 3 ❤️ 's\n"
+      print "\n"
     
-    show_usage
+      show_usage
+    end
     
     @🤖    = Robot.new(options)    
     @score = 0
+    @commands_valid = false
+    
     game_loop if !is_test?
   end
   
@@ -25,10 +29,8 @@ class Game
   #
   
   def game_loop
-    @quit           = false
-    @commands_valid = false
 
-    while !@quit 
+    while @🤖.is_alive?
       say "Your move"
       error  = nil
       array  = STDIN.gets.strip.split(' ') # Accept user input
@@ -57,7 +59,6 @@ class Game
         @score += 1 if !@quit
       end
       
-      @quit = true if !@🤖.is_alive?
     end
     
     game_over
@@ -82,7 +83,7 @@ class Game
     when "RIGHT"  then @🤖.right! if commands_valid?
     when "REPORT" then @🤖.stat   if commands_valid?
     when "?"      then show_usage
-    when "EXIT"   then @quit = true
+    when "EXIT"   then @🤖.💀!
     else               error = "\nInvalid input: #{array.join(' ')}"
     end
     
