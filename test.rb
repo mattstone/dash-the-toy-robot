@@ -403,7 +403,15 @@ class Test
   #
   
   def report_tests
-    @game.🤖.stat
+    header("report_tests")
+    
+    object = @game.🤖.stat
+
+    case object[:x] == 1 and object[:y] == 2 and object[:orientation].to_s.upcase == "SOUTH"
+    when true then good("@game.🤖.stat reporting correct data")
+    when false then bad("@game.🤖.stat not reporting correct data")
+    end
+    
   end
   
 end
