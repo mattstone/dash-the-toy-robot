@@ -29,10 +29,10 @@ class Game
   end
   
   def accept_input
-    quit            = false
+    @quit           = false
     @commands_valid = false
 
-    while !quit 
+    while !@quit 
       say "Your move"
       error  = nil
       array  = STDIN.gets.strip.split(' ') # Accept user input
@@ -59,10 +59,10 @@ class Game
         print "#{error}\n\n".colorize(:red)
         show_usage
       else 
-        @score += 1
+        @score += 1 if !@quit
       end
       
-      quit = true if !@🤖.is_alive?
+      @quit = true if !@🤖.is_alive?
     end
     
     game_over
@@ -89,7 +89,7 @@ class Game
     when "RIGHT"  then @🤖.right! if commands_valid?
     when "REPORT" then @🤖.stat   if commands_valid?
     when "?"      then show_usage
-    when "EXIT"   then quit = true
+    when "EXIT"   then @quit = true
     else 
       error = "\nInvalid input: #{array.join(' ')}"
     end
@@ -123,6 +123,7 @@ class Game
     print "LEFT\n"   # changes orientation
     print "RIGHT\n"  # changes orientation 
     print "REPORT\n" # show location
+    print "EXIT\n"
     print "?\n"      # show instructions
     print "\n"
   end

@@ -15,7 +15,7 @@ class World
   
   def horizonal_line 
     1.upto((2 * @max_y) + 6) { |i| print "-" }
-     new_line
+    new_line
   end
   
   def new_line
