@@ -13,7 +13,7 @@ class Game
     
     @🤖    = Robot.new(options)    
     @score = 0
-    accept_input if !is_test?
+    game_loop if !is_test?
   end
   
   def is_test?
@@ -28,11 +28,11 @@ class Game
     @commands_valid == true 
   end
   
-  def accept_input
+  def game_loop
     @quit           = false
     @commands_valid = false
 
-    while !@quit # Game loop
+    while !@quit 
       say "Your move"
       error  = nil
       array  = STDIN.gets.strip.split(' ') # Accept user input
@@ -102,6 +102,8 @@ class Game
     print "\n"
     print "Score: #{@score}\n".colorize(:cyan).blink
     print "\n"
+
+    say "Game over"
     
     case @score 
     when 0..4 then print "Level: 🤡 Bozo\n".colorize(:cyan).blink
@@ -110,7 +112,6 @@ class Game
     end
 
     print "\n"
-    say "Game over"
   end
   
   private 
