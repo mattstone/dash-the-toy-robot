@@ -45,14 +45,12 @@ class Game
       when @🤖.error?
         say "Life lost" if !@🤖.full_health?
         
-        if !@🤖.error.empty?
-          case @🤖.lives > 1
-          when true  then print "#{@🤖.error}\n\n".colorize(:red)
-          when false 
-            print "#{@🤖.error.gsub(" ❤️", "")}".colorize(:red)
-            print "❤️".colorize(:red).blink
-            print "\n\n"
-          end
+        case @🤖.lives > 1
+        when true  then print "#{@🤖.error}\n\n".colorize(:red)
+        when false 
+          print "#{@🤖.error.gsub(" ❤️", "")}".colorize(:red)
+          print "❤️".colorize(:red).blink
+          print "\n\n"
         end
         
       when !error.nil?
