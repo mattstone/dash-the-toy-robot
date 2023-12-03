@@ -30,7 +30,7 @@ class Game
   
   def game_loop
 
-    while @🤖.is_alive?
+    while 🤖.is_alive?
       say "Your move"
       error  = nil
       array  = STDIN.gets.strip.split(' ') # Accept user input
@@ -40,14 +40,14 @@ class Game
       error = process_move(array)
       
       case 
-      when @🤖.error?
-        say "Life lost" if !@🤖.full_health?
+      when 🤖.error?
+        say "Life lost" if !🤖.full_health?
         
-        case @🤖.lives > 1
-        when true  then print "#{@🤖.error}\n\n".colorize(:red)
+        case 🤖.lives > 1
+        when true  then print "#{🤖.error}\n\n".colorize(:red)
         when false
           # Flash warning of one life left!
-          print "#{@🤖.error.gsub(" ❤️", "")}".colorize(:red)
+          print "#{🤖.error.gsub(" ❤️", "")}".colorize(:red)
           print "❤️".colorize(:red).blink
           print "\n\n"
         end
@@ -67,7 +67,7 @@ class Game
   
   def process_move(array)
     error = nil 
-    @🤖.reset_error!
+    🤖.reset_error!
     
     case array[0].upcase
     when "PLACE"
@@ -75,15 +75,15 @@ class Game
       
       case array.count == 4
       when false then error = "PLACE command requires format PLACE X Y ORIENTATION"
-      when true  then @🤖.place!(array[1], array[2], array[3])
+      when true  then 🤖.place!(array[1], array[2], array[3])
       end
       
-    when "MOVE"   then @🤖.move!  if commands_valid?
-    when "LEFT"   then @🤖.left!  if commands_valid?
-    when "RIGHT"  then @🤖.right! if commands_valid?
-    when "REPORT" then @🤖.stat   if commands_valid?
+    when "MOVE"   then 🤖.move!  if commands_valid?
+    when "LEFT"   then 🤖.left!  if commands_valid?
+    when "RIGHT"  then 🤖.right! if commands_valid?
+    when "REPORT" then 🤖.stat   if commands_valid?
     when "?"      then show_usage
-    when "EXIT"   then @🤖.💀!
+    when "EXIT"   then 🤖.💀!
     else               error = "\nInvalid input: #{array.join(' ')}"
     end
     

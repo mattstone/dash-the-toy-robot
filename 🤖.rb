@@ -43,7 +43,6 @@ class Robot
     when true  then { x: @position_x, y: @position_y, orientation: orientation_to_s }
     when false then print "🤖 is at position x: #{@position_x} y: #{@position_y} and is facing #{orientation_to_s}. #{lives_left_to_s}\n\n".colorize(:cyan)
     end
-    
   end
   
   def place!(x, y, orientation)
