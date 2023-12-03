@@ -32,7 +32,7 @@ class Game
     @quit           = false
     @commands_valid = false
 
-    while !@quit 
+    while !@quit # Game loop
       say "Your move"
       error  = nil
       array  = STDIN.gets.strip.split(' ') # Accept user input
@@ -73,8 +73,6 @@ class Game
     error = nil 
     @🤖.reset_error!
     
-    # p array[0].upcase
-    
     case array[0].upcase
     when "PLACE"
       @commands_valid = true if !commands_valid?
@@ -90,8 +88,7 @@ class Game
     when "REPORT" then @🤖.stat   if commands_valid?
     when "?"      then show_usage
     when "EXIT"   then @quit = true
-    else 
-      error = "\nInvalid input: #{array.join(' ')}"
+    else               error = "\nInvalid input: #{array.join(' ')}"
     end
     
     error
@@ -104,6 +101,14 @@ class Game
     print "=====================================\n".colorize(:red).blink
     print "\n"
     print "Score: #{@score}\n".colorize(:cyan).blink
+    print "\n"
+    
+    case @score 
+    when 0..4 then print "Level: 🤡 Bozo\n".colorize(:cyan).blink
+    when 5..9 then print "Level: 🙂 Average\n".colorize(:cyan).blink
+    else           print "Level: 🤩 Legend\n".colorize(:cyan).blink
+    end
+
     print "\n"
     say "Game over"
   end
