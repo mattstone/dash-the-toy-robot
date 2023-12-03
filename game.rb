@@ -16,17 +16,13 @@ class Game
     game_loop if !is_test?
   end
   
-  def is_test?
-    @test == true
-  end
-  
   def 🤖
     @🤖
   end
   
-  def commands_valid?
-    @commands_valid == true 
-  end
+  #
+  # Game loop
+  #
   
   def game_loop
     @quit           = false
@@ -93,27 +89,15 @@ class Game
     error
   end
   
-  def game_over
-    print "\n"
-    print "=====================================\n".colorize(:red).blink
-    print "=             GAME OVER             =\n".colorize(:red).blink
-    print "=====================================\n".colorize(:red).blink
-    print "\n"
-    print "Score: #{@score}\n".colorize(:cyan).blink
-    print "\n"
-
-    say "Game over"
-    
-    case @score 
-    when 0..4 then print "Level: 🤡 Bozo\n".colorize(:cyan).blink
-    when 5..9 then print "Level: 🙂 Average\n".colorize(:cyan).blink
-    else           print "Level: 🤩 Legend\n".colorize(:cyan).blink
-    end
-
-    print "\n"
+  private 
+  
+  def is_test?
+    @test == true
   end
   
-  private 
+  def commands_valid?
+    @commands_valid == true 
+  end
   
   def say(string)
     system("say '#{string}'") if mac?
@@ -135,6 +119,26 @@ class Game
   
   def mac?
     (/darwin/ =~ RUBY_PLATFORM) != nil
+  end
+  
+  def game_over
+    print "\n"
+    print "=====================================\n".colorize(:red).blink
+    print "=             GAME OVER             =\n".colorize(:red).blink
+    print "=====================================\n".colorize(:red).blink
+    print "\n"
+    print "Score: #{@score}\n".colorize(:cyan).blink
+    print "\n"
+
+    say "Game over"
+    
+    case @score 
+    when 0..4 then print "Level: 🤡 Bozo\n".colorize(:cyan).blink
+    when 5..9 then print "Level: 🙂 Average\n".colorize(:cyan).blink
+    else           print "Level: 🤩 Legend\n".colorize(:cyan).blink
+    end
+
+    print "\n"
   end
   
 end

@@ -88,9 +88,7 @@ class Robot
     when ORIENTATION[:EAST]  then @position_x += 1
     end
     
-    case @world.position_valid?(@position_x, @position_y)
-    when true then show_map
-    when false
+    if !@world.position_valid?(@position_x, @position_y)
       lose_life!
       
       @error = case is_alive?
@@ -99,9 +97,9 @@ class Robot
         end
       
       restore_position!
-      show_map
     end
     
+    show_map
   end
   
   def full_health?
